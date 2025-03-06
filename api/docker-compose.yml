@@ -1,0 +1,9 @@
+services:
+  webapp:
+    image: bitnami/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      -  POSTGRES_USER=dailyDiet      # Nome do usuário do banco de dados
+      -  POSTGRES_PASSWORD=dailyDiet  # Senha do banco de dados
+      -  POSTGRES_DB=dailyDietDataBase
