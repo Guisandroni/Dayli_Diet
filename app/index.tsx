@@ -23,13 +23,17 @@ export default function Index() {
            
             <Text className="font-nunito-bold text-3xl ">Daily Diet</Text>
           </View>
-
-          <View className="bg-black w-12 h-12 rounded-full"></View>
+        
+          <TouchableOpacity  
+            className="bg-black w-12 h-12 rounded-full"
+          onPress={()=>router.push('/testapi')}>
+         
+          </TouchableOpacity>
         </View>
 
         <View className="flex items-center justify-center bg-green-mid py-6 rounded-xl relative mt-10">
           <Text className="text-center text-4xl font-bold">90,86% {'\n'}
-            <Text className="text-xl font-light">das refeições dentro da dieta</Text>
+            <Text  className="text-xl font-light">das refeições dentro da dieta</Text>
           </Text>
           
           <MaterialCommunityIcons onPress={()=>router.push('/pages/sequence')} name="arrow-top-right" size={24} color="green" className="absolute right-6 top-2" />
