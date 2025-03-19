@@ -1,5 +1,4 @@
 import DietCard from "@/components/DietCard";
-import { dietData, dietDatasecond } from "@/seed/constraints";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { FlatList, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
@@ -9,12 +8,18 @@ import { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { getDietSequences, getDietStats } from "./api/getStats";
 
+interface GroupedDiets {
+  date: string;
+  diets: any[];
+}
+
 export default function Index() {
   const { diets, loading, fetchDiets } = useDiets()
   const isFocused = useIsFocused()
   const [stats, setStats] = useState<any>(null)
   const [sequences, setSequences] = useState<any>(null)
   const [inLoading, setLoading] = useState(true)
+  const [groupedDiets, setGroupedDiets] = useState<GroupedDiets[]>([])
   const porcentagem = stats?.inDiet?.percentage?.toFixed(2)
   
   const loadData = async () => {
@@ -33,15 +38,44 @@ export default function Index() {
     }
   }
 
-
-
   useEffect(() => {
     if (isFocused) {
       fetchDiets()
-      getDietStats()
       loadData()
     }
   }, [isFocused])
+
+  useEffect(() => {
+    if (diets) {
+      // Agrupa as dietas por data
+      const grouped = diets.reduce((acc: { [key: string]: any[] }, diet: any) => {
+        if (!acc[diet.dateCreated]) {
+          acc[diet.dateCreated] = [];
+        }
+        acc[diet.dateCreated].push(diet);
+        return acc;
+      }, {});
+
+      // Converte o objeto agrupado em array e ordena por data (mais recente primeiro)
+      const groupedArray = Object.entries(grouped).map(([date, diets]) => ({
+        date,
+        diets
+      })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      setGroupedDiets(groupedArray);
+    }
+  }, [diets]);
+
+  const renderDietGroup = ({ item }: { item: GroupedDiets }) => (
+    <View className="gap-4 mt-10">
+      <Text className="text-2xl font-bold">{item.date}</Text>
+      <View className="flex flex-col gap-4 mt-2">
+        {item.diets.map((diet) => (
+          <DietCard key={diet.id} item={diet} />
+        ))}
+      </View>
+    </View>
+  );
 
   return (
     <SafeAreaView className="h-full px-6 py-8 bg-gray-100">
@@ -77,43 +111,27 @@ export default function Index() {
         <View className="flex flex-col items-start gap-4 mt-10">
           <Text className="text-xl">Refeições</Text>
           <TouchableOpacity 
-          onPress={()=>router.push('/pages/newdiet')}
-          className="flex flex-row items-center justify-center w-full h-16 gap-6 bg-gray-1 rounded-xl">
+            onPress={() => router.push('/pages/newdiet')}
+            className="flex flex-row items-center justify-center w-full h-16 gap-6 bg-gray-1 rounded-xl"
+          >
             <AntDesign name="plus" size={22} color="white" className="font-bold" />
             <Text className="text-xl text-white">Nova refeição</Text>
           </TouchableOpacity>
         </View>
 
-        <View className="flex items-start justify-center gap-4 mt-10">
-          <Text className="text-2xl font-bold">02.03.25</Text>
-
-          {loading ? (
-            <View className="flex items-center justify-center mt-10">
-              <Text>Carregando dietas...</Text>
-            </View>
-          ) : (
-            <FlatList
-              contentContainerClassName="flex mt-2 gap-4"
-              data={diets}
-              renderItem={({ item }) => <DietCard item={item} />}
-              keyExtractor={(item) => item.id}
-            />
-          )}
-        </View>
-
-        <View className="flex items-start justify-center gap-4 mt-10">
-          <Text className="text-2xl font-bold">{}</Text>
-
-          {/* <FlatList
-            contentContainerClassName="flex mt-2 gap-4"
-            data={diets}
-            renderItem={({ item }) => <DietCard item={item}  />}
-            keyExtractor={(item) => item.toString()}
-          /> */}
-          
-        </View>
+        {loading ? (
+          <View className="flex items-center justify-center mt-10">
+            <Text>Carregando dietas...</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={groupedDiets}
+            renderItem={renderDietGroup}
+            keyExtractor={(item) => item.date}
+            scrollEnabled={false}
+          />
+        )}
       </ScrollView>
-
     </SafeAreaView>
   );
 }

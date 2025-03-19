@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 
 const DietCard = ({item} : {item:any}) => {
   const limitText = (text:string, maxLength:number=40) => {
-    return item.name.length > 30 ? item.name.substring(0, 30) + '...' : item.name
+    return item.name.length > 26 ? item.name.substring(0, 26) + '...' : item.name
   }
 
   return (

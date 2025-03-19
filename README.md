@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# 🥗 DailyDiet
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e acompanhar suas refeições diárias, mantendo um histórico do que está dentro ou fora da sua dieta.
 
-## Get started
+## 📱 Screenshots
 
-1. Install dependencies
+<div align="center">
+  <div style="display: flex; gap: 0.5rem;">
+    <img alt="Home screen" src="./docs/Screenshot_2025-03-19-16-48-55-430_host.exp.exponent.jpg" width="200px" />
+    <img alt="Statistics screen" src="./docs/Screenshot_2025-03-19-16-49-02-418_host.exp.exponent.jpg" width="200px" />
+    <img alt="New meal screen" src="./docs/Screenshot_2025-03-19-16-49-09-057_host.exp.exponent.jpg" width="200px" />
+  </div>
+  
+  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+    <img alt="Meal details" src="./docs/Screenshot_2025-03-19-16-49-14-996_host.exp.exponent.jpg" width="200px" />
+    <img alt="Edit meal" src="./docs/Screenshot_2025-03-19-16-49-19-162_host.exp.exponent.jpg" width="200px" />
+    <img alt="Delete meal" src="./docs/Screenshot_2025-03-19-16-49-23-225_host.exp.exponent.jpg" width="200px" />
+  </div>
+</div>
 
+## ✨ Funcionalidades
+
+- 📝 Registro de refeições com:
+  - Nome
+  - Descrição
+  - Data e hora
+  - Status (dentro/fora da dieta)
+- 📊 Estatísticas detalhadas:
+  - Porcentagem de refeições dentro da dieta
+  - Sequência de refeições dentro da dieta
+  - Total de refeições registradas
+  - Contagem de refeições dentro/fora da dieta
+- 📱 Interface intuitiva:
+  - Agrupamento de refeições por data
+  - Indicadores visuais de status (verde/vermelho)
+  - Navegação simplificada
+
+## 🚀 Tecnologias
+
+### Frontend
+- [Expo](https://expo.dev) - Framework para desenvolvimento mobile
+- [React Native](https://reactnative.dev) - Framework para apps nativos
+- [TypeScript](https://www.typescriptlang.org) - Superset JavaScript tipado
+- [TailwindCSS](https://tailwindcss.com) - Framework CSS utilitário
+- [Expo Router](https://docs.expo.dev/router/introduction) - Sistema de rotas
+
+### Backend
+- [Fastify](https://www.fastify.io/) - Framework web rápido e eficiente
+- [PostgreSQL](https://www.postgresql.org/) - Banco de dados relacional
+- [Docker](https://www.docker.com/) - Containerização
+- [Zod](https://zod.dev/) - Validação de schemas
+- [CORS](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CORS) - Compartilhamento de recursos
+
+## 💻 Começando
+
+### Configurando o Backend
+
+1. Navegue até a pasta da API:
+   ```bash
+   cd api
+   ```
+
+2. Inicie o container Docker com PostgreSQL:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Instale as dependências do backend:
    ```bash
    npm install
    ```
 
-2. Start the app
-
+4. Inicie o servidor:
    ```bash
-    npx expo start
+   npm run dev
    ```
 
-In the output, you'll find options to open the app in a
+### Configurando o Frontend
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. Na pasta frontend, instale as dependências:
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2. Inicie o projeto:
+   ```bash
+   npx expo start
+   ```
 
-## Get a fresh project
+## 📱 Executando o App
 
-When you're ready, run:
+Você pode executar o app de várias formas:
 
-```bash
-npm run reset-project
-```
+- **Expo Go**: Escaneie o QR code com o app Expo Go ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779))
+- **Emulador**: Use um [emulador Android](https://docs.expo.dev/workflow/android-studio-emulator) ou [simulador iOS](https://docs.expo.dev/workflow/ios-simulator)
+- **Dispositivo físico**: Conecte seu dispositivo via USB
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🎯 Recursos Principais
 
-## Learn more
+- **Gestão de Estado**: Hooks personalizados para gerenciamento de dados
+- **Navegação**: Sistema de rotas baseado em arquivos com Expo Router
+- **API**: Integração com backend para persistência de dados
+- **UI/UX**: Interface moderna e responsiva com feedback visual
+- **Tipagem**: TypeScript para maior segurança e manutenibilidade
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
