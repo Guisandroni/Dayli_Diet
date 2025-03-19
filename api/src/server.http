@@ -1,6 +1,6 @@
 
 
-GET http://localhost:3333 
+GET http://localhost:3333/diets
 Content-Type: application/json
 
 ###
@@ -18,7 +18,7 @@ Content-Type: application/json
 }   
 
 ###
-GET http://localhost:3333/ab8e2dd7-a606-4fc4-b4a7-c6471407fd68
+GET http://localhost:3333/diets/65dac10f-f6f7-4819-a476-15df5ffc819f
 Content-Type: application/json
 
 ###

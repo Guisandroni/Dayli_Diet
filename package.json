@@ -17,6 +17,9 @@
   "dependencies": {
     "@expo-google-fonts/nunito-sans": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
+    "@fastify/cors": "^11.0.0",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "axios": "^1.8.1",

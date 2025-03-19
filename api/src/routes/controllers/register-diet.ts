@@ -6,25 +6,41 @@ export const registerDiet = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  const statusdiet = z.enum(["SIM", "NAO"]);
-  const validadeDietParams = z.object({
-    name: string(),
-    description: string(),
-    hourCreated: string(),
-    dateCreated: string(),
-    inDiet: statusdiet,
-  });
+  try {
+    const statusdiet = z.enum(["SIM", "NAO"]);
+    const validadeDietParams = z.object({
+      name: string(),
+      description: string(),
+      hourCreated: string(),
+      dateCreated: string(),
+      inDiet: statusdiet,
+    });
 
-  const { name, description, hourCreated, dateCreated, inDiet } =
-    validadeDietParams.parse(request.body);
-  const diets = await prisma.diet.create({
-    data: {
-      name,
-      description,
-      hourCreated,
-      dateCreated,
-      inDiet,
-    },
-  });
-  return reply.status(201).send(diets);
+    const { name, description, hourCreated, dateCreated, inDiet } =
+      validadeDietParams.parse(request.body);
+    const diets = await prisma.diet.create({
+      data: {
+        name,
+        description,
+        hourCreated,
+        dateCreated,
+        inDiet,
+      },
+    });
+    return reply.status(201).send(diets);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return reply.status(400).send({
+        status: 'error',
+        message: 'Dados inválidos',
+        details: error.errors
+      });
+    }
+    
+    console.error('Erro ao registrar refeição:', error);
+    return reply.status(500).send({
+      status: 'error',
+      message: 'Erro ao registrar refeição'
+    });
+  }
 };
