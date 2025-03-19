@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import getDiets, { Diet } from '../api/getDiets'
+import deleteDiet from '../api/deleteDiet'
+import { useIsFocused } from '@react-navigation/native'
 
 export const useDiets = () => {
   const [diets, setDiets] = useState<Diet[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const isFocused = useIsFocused()
 
   const fetchDiets = async () => {
     try {
@@ -32,10 +35,32 @@ export const useDiets = () => {
     }
   }
 
+  const removeDiet = async (id: string) => {
+    try {
+      setLoading(true)
+      setError(null)
+      await deleteDiet(id)
+      await fetchDiets() // Recarrega a lista após deletar
+    } catch (err: any) {
+      console.error('Erro ao deletar dieta:', err)
+      setError(err.message || 'Erro ao deletar dieta. Verifique sua conexão.')
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchDiets()
+    }
+  }, [isFocused])
+
   return {
     diets,
     loading,
     error,
-    fetchDiets
+    fetchDiets,
+    removeDiet
   }
 } 

@@ -32,3 +32,38 @@ Content-Type: application/json
   "dateCreated": "2023/12/10",
   "inDiet": "NAO"
 }
+
+###
+
+GET http://localhost:3333/diets/stats/in-diet
+
+###
+
+GET http://localhost:3333/diets/stats/out-diet
+
+###
+
+GET http://localhost:3333/diets/stats/total
+
+###
+
+GET http://localhost:3333/diets/sequence/in-diet
+
+###
+
+GET http://localhost:3333/diets/sequence/out-diet
+
+###
+
+GET http://localhost:3333/diets/ordered
+
+
+
+app.get("/diets/stats/in-diet", SimDiet);      // Refeições dentro da dieta
+  app.get("/diets/stats/out-diet", NaoDiet);     // Refeições fora da dieta
+  app.get("/diets/stats/total", AllDiet);        // Total de refeições
+
+  // Rotas de sequência e ordenação
+  app.get("/diets/sequence/in-diet", getInDietSequence);    // Sequência na dieta
+  app.get("/diets/sequence/out-diet", getNotInDietSequence); // Sequência fora da dieta
+  app.get("/diets/ordered", OrderByDate);  
