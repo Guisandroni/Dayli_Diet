@@ -5,7 +5,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3333 
+POST http://localhost:3333/diets/123b8595-1e1d-4d01-84dc-89a290df8671
 Content-Type: application/json
 
 
@@ -14,48 +14,53 @@ Content-Type: application/json
     "description":"pizza com recheio de banana e chocolate",
     "hourCreated": "23:00",
     "dateCreated": "12/02/2015",
-    "inDiet":       "NAO"
+    "inDiet":       "NAO",
+    "id": "006b6d1c-e895-4f2b-823e-0637e833eb67",
+    "userId": "f2146f0-004c-4e68-8e43-22f24212a7c5"
 }   
 
 ###
-GET http://localhost:3333/diets/65dac10f-f6f7-4819-a476-15df5ffc819f
+GET http://localhost:3333/diets/123b8595-1e1d-4d01-84dc-89a290df8671/f869bef9-8f90-40c7-94ab-11256897c08a
 Content-Type: application/json
 
 ###
-PUT  http://localhost:3333/ab8e2dd7-a606-4fc4-b4a7-c6471407fd68
+PUT  http://localhost:3333/diets/123b8595-1e1d-4d01-84dc-89a290df8671/6f2146f0-004c-4e68-8e43-22f24212a7c5
 Content-Type: application/json
 
 {
-  "name": "Pão com ovo",
+  "name": "paozin",
   "description": "Refeição da manhã",
   "hourCreated": "08:00",
   "dateCreated": "2023/12/10",
   "inDiet": "NAO"
 }
+###
+
+DELETE http://localhost:3333/diets/123b8595-1e1d-4d01-84dc-89a290df8671/6f2146f0-004c-4e68-8e43-22f24212a7c5
 
 ###
 
-GET http://localhost:3333/diets/stats/in-diet
+GET http://localhost:3333/diets/stats/in-diet/123b8595-1e1d-4d01-84dc-89a290df8671
 
 ###
 
-GET http://localhost:3333/diets/stats/out-diet
+GET http://localhost:3333/diets/stats/out-diet/123b8595-1e1d-4d01-84dc-89a290df8671
 
 ###
 
-GET http://localhost:3333/diets/stats/total
+GET http://localhost:3333/diets/stats/total/123b8595-1e1d-4d01-84dc-89a290df8671
 
 ###
 
-GET http://localhost:3333/diets/sequence/in-diet
+GET http://localhost:3333/diets/sequence/in-diet/123b8595-1e1d-4d01-84dc-89a290df8671
 
 ###
 
-GET http://localhost:3333/diets/sequence/out-diet
+GET http://localhost:3333/diets/sequence/out-diet/123b8595-1e1d-4d01-84dc-89a290df8671
 
 ###
 
-GET http://localhost:3333/diets/ordered
+GET http://localhost:3333/diets/ordered/123b8595-1e1d-4d01-84dc-89a290df8671
 
 
 
@@ -67,3 +72,62 @@ app.get("/diets/stats/in-diet", SimDiet);      // Refeições dentro da dieta
   app.get("/diets/sequence/in-diet", getInDietSequence);    // Sequência na dieta
   app.get("/diets/sequence/out-diet", getNotInDietSequence); // Sequência fora da dieta
   app.get("/diets/ordered", OrderByDate);  
+
+###
+
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+  "name": "Guilherme",
+  "email": "guilherme@gmail.com",
+  "password": "123456"
+}
+
+###
+GET http://localhost:3333/users/006b6d1c-e895-4f2b-823e-0637e833eb67
+Content-Type: application/json
+
+###
+
+GET http://localhost:3333/users
+Content-Type: application/json
+
+
+###
+
+GET http://localhost:3333/users/diets/user/ba08f26c-8fd4-4448-a65e-11adc7f28adf
+Content-Type: application/json
+
+
+###
+
+POST http://localhost:3333/users/diets/123b8595-1e1d-4d01-84dc-89a290df8671
+Content-Type: application/json
+
+{
+  "name": "Pão com ovo",
+  "description": "Refeição da manhã",
+  "hourCreated": "08:00",
+  "dateCreated": "2023/12/10",
+  "inDiet": "NAO",
+  "id": "123b8595-1e1d-4d01-84dc-89a290df8671"
+}
+
+
+###
+GET http://localhost:3333/users/diets/user/123b8595-1e1d-4d01-84dc-89a290df8671
+Content-Type: application/json
+
+###
+
+POST http://localhost:3333/users/login
+Content-Type: application/json
+
+{
+  "email": "guilherme@gmail.com",
+  "password": "123456"
+}
+
+
+

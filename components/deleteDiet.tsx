@@ -11,10 +11,10 @@ interface ModalProps {
 }
 
 export const DeleteDiet: React.FC<ModalProps> = ({ item, modal, setModal }) => {
-  const { id } = useLocalSearchParams()
-    const { diet } = useDiet(id as string)
+  const { id, userId } = useLocalSearchParams()
+    const { diet } = useDiet(id as string, userId as string)
     console.log(diet)
-    const { removeDiet } = useDiets()
+    const { removeDiet } = useDiets(userId as string)
 
     const handleDelete = async () => {
       await removeDiet(item.id)

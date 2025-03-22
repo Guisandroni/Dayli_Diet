@@ -1,4 +1,4 @@
-import api from "./axios"
+import api from "../axios"
 
 interface UpdateDietData {
   name?: string
@@ -8,9 +8,9 @@ interface UpdateDietData {
   inDiet?: 'SIM' | 'NAO'
 }
 
-const updateDiet = async (id: string, data: UpdateDietData) => {
+const updateDiet = async (userId: string, id: string, data: UpdateDietData) => {
   try {
-    const response = await api.put(`/diets/${id}`, data)
+    const response = await api.put(`/diets/${userId}/${id}`, data)
     return response.data
   } catch (error) {
     console.error('Erro ao atualizar dieta:', error)

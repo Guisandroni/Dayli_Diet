@@ -4,13 +4,13 @@ import { dietDatasecond } from '@/seed/constraints'
 import { router, useLocalSearchParams } from 'expo-router'
 import { DeleteDiet } from './deleteDiet'
 import { useDiet } from '@/app/hooks/useDiet'
-import { Diet } from '@/app/api/getDiets'
+import { Diet } from '@/app/api/diet/getDiets'
 import { useDiets } from '@/app/hooks/useDiets'
 
 const DietStatus = ({ item }: { item: any }) => {
     const [modal, setModal] = useState(false)
-    const { id } = useLocalSearchParams()
-    const { diet } = useDiet(id as string)
+    const { id, userId } = useLocalSearchParams()
+    const { diet } = useDiet(id as string, userId as string)
     console.log(diet)
    
 
@@ -38,7 +38,7 @@ const DietStatus = ({ item }: { item: any }) => {
                 <TouchableOpacity
                     onPress={() => router.push({
                         pathname: '/pages/editDiet',
-                        params: { id: diet?.id }
+                        params: { id: diet?.id, userId: diet?.userId }
                     })}
                     className='flex items-center justify-center w-full p-5 bg-gray-1 rounded-xl'
                 >

@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { date, string, z } from "zod";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 
-export const registerDiet = async (
+export const userDiet = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
@@ -14,9 +14,10 @@ export const registerDiet = async (
       hourCreated: string(),
       dateCreated: string(),
       inDiet: statusdiet,
+      id: z.string(),
     });
 
-    const { name, description, hourCreated, dateCreated, inDiet } =
+    const { name, description, hourCreated, dateCreated, inDiet, id } =
       validadeDietParams.parse(request.body);
     const diets = await prisma.diet.create({
       data: {
@@ -25,6 +26,7 @@ export const registerDiet = async (
         hourCreated,
         dateCreated,
         inDiet,
+        userId: id,
       },
     });
     return reply.status(201).send(diets);

@@ -2,7 +2,7 @@ import { View, Text, StatusBar, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { router } from 'expo-router'
-import { getDietStats, getDietSequences } from '../api/getStats'
+import { getDietStats, getDietSequences } from '../api/diet/getStats'
 import { useIsFocused } from '@react-navigation/native'
 
 const Sequence = () => {

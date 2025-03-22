@@ -11,7 +11,7 @@ const DietCard = ({item} : {item:any}) => {
     <TouchableOpacity
       onPress={() => router.push({
         pathname: '/pages/diet',
-        params: { id: item.id }
+        params: { id: item.id, userId: item.userId }
       })}
       className="flex flex-row"
     >

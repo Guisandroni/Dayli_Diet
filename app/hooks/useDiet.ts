@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useIsFocused } from '@react-navigation/native'
-import getDietID from '../api/getDietID'
-import updateDiet from '../api/updateDiet'
+import getDietID from '../api/diet/getDietID'
+import updateDiet from '../api/diet/updateDiet'
 
 interface Diet {
   id: string
@@ -10,6 +10,7 @@ interface Diet {
   hourCreated: string
   dateCreated: string
   inDiet: 'SIM' | 'NAO'
+  userId:string
 }
 
 interface UpdateDietData {
@@ -20,7 +21,7 @@ interface UpdateDietData {
   dateCreated?: string
 }
 
-export const useDiet = (id: string) => {
+export const useDiet = (id: string,userId:string) => {
   const [diet, setDiet] = useState<Diet | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -30,7 +31,7 @@ export const useDiet = (id: string) => {
     try {
       setLoading(true)
       setError(null)
-      const data = await getDietID(id)
+      const data = await getDietID(id,userId)
       setDiet(data)
     } catch (err: any) {
       console.error('Erro ao buscar dieta:', err)
@@ -44,7 +45,7 @@ export const useDiet = (id: string) => {
     try {
       setLoading(true)
       setError(null)
-      const updatedDiet = await updateDiet(id, data)
+      const updatedDiet = await updateDiet(userId,id, data)
       setDiet(updatedDiet)
       return updatedDiet
     } catch (err: any) {

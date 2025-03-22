@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import Yorn from '@/components/yorn'
-import createDiet from '../api/createDiet'
+import createDiet from '../api/diet/createDiet'
 
 const NewDiet = () => {
   const [formData, setFormData] = useState({

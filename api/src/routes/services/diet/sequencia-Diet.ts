@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../../lib/prisma"
+import { z } from "zod";
 
 interface Meal {
     id: string;
@@ -21,8 +22,16 @@ interface SequenceStats {
 }
 
 export const getInDietSequence = async (request: FastifyRequest, reply: FastifyReply) => {
+   const paramsUserId = z.object({
+    userId: z.string().uuid()
+   })
     try {
+        const {userId} = paramsUserId.parse(request.params)
+
         const meals = await prisma.diet.findMany({
+            where:{
+                userId:userId
+            },
             orderBy: [
                 { dateCreated: 'asc' },
                 { hourCreated: 'asc' }
@@ -32,6 +41,8 @@ export const getInDietSequence = async (request: FastifyRequest, reply: FastifyR
                 inDiet: true
             }
         });
+
+
 
         let currentSequence = 0;
         let maxSequence = 0;
@@ -76,8 +87,16 @@ export const getInDietSequence = async (request: FastifyRequest, reply: FastifyR
 }
 
 export const getNotInDietSequence = async (request: FastifyRequest, reply: FastifyReply) => {
+    const paramsUserId = z.object({
+        userId: z.string().uuid()
+       })
+   
     try {
+        const {userId} = paramsUserId.parse(request.params)
         const meals = await prisma.diet.findMany({
+            where:{
+                userId:userId
+            },
             orderBy: [
                 { dateCreated: 'asc' },
                 { hourCreated: 'asc' }
@@ -131,8 +150,15 @@ export const getNotInDietSequence = async (request: FastifyRequest, reply: Fasti
 }
 
 export const OrderByDate = async (request: FastifyRequest, reply: FastifyReply) => {
+    const paramsUserId = z.object({
+        userId: z.string().uuid()
+       })
     try {
+        const {userId} = paramsUserId.parse(request.params)
         const meals = await prisma.diet.findMany({
+            where:{
+                userId:userId
+            },
             orderBy: [
                 { dateCreated: 'asc' },
                 { hourCreated: 'asc' }

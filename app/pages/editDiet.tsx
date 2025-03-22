@@ -7,8 +7,8 @@ import { useIsFocused } from '@react-navigation/native'
 import { useDiet } from '../hooks/useDiet'
 
 const EditDiet = () => {
-  const { id } = useLocalSearchParams()
-  const { diet, loading, error, updateDiet } = useDiet(id as string)
+  const { id, userId } = useLocalSearchParams()
+  const { diet, loading, error, updateDiet } = useDiet(id as string,userId as string)
   const [formData, setFormData] = useState({
     name: '',
     description: '',

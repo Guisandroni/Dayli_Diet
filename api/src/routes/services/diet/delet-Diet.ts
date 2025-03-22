@@ -1,18 +1,19 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../../lib/prisma"
 
 export const deleteDiet = async (request: FastifyRequest, reply: FastifyReply) => {
     try {
         const validateDietParams = z.object({
-            id: z.string().uuid()
+            id: z.string().uuid(),
+            userId: z.string().uuid()
         });
 
-        const { id } = validateDietParams.parse(request.params);
+        const { id, userId } = validateDietParams.parse(request.params);
 
         // Verifica se a refeição existe antes de tentar deletar
         const existingDiet = await prisma.diet.findUnique({
-            where: { id }
+            where: { id, userId }
         });
 
         if (!existingDiet) {

@@ -13,6 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  diets     Diet[]
+}
+
 model Diet {
   id          String     @id @default(uuid())
   name        String
@@ -20,6 +30,8 @@ model Diet {
   hourCreated String
   dateCreated String
   inDiet      DietStatus
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 enum DietStatus {
