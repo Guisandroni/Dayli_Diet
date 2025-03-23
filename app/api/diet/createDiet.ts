@@ -8,7 +8,7 @@ interface CreateDietData {
   inDiet: 'SIM' | 'NAO'
 }
 
-const createDiet = async (data: CreateDietData) => {
+export const createDiet = async (data: CreateDietData) => {
   try {
     const response = await api.post('/diets', data)
     return response.data
@@ -18,4 +18,3 @@ const createDiet = async (data: CreateDietData) => {
   }
 }
 
-export default createDiet 

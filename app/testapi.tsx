@@ -3,13 +3,12 @@ import React, { useEffect } from 'react'
 import { useDiets } from './hooks/useDiets'
 
 const TestApi = () => {
-  const { diets, loading, error, fetchDiets } = useDiets()
+  const { diets, loading, error, fetchDiets } = useDiets('66f06160f0323949d3f3d4d8')
 
   useEffect(() => {
     fetchDiets()
   }, [])
 
-  // Componente para renderizar cada item da lista
   const renderItem = ({ item }: { item: any }) => (
     <View style={styles.dietItem}>
       <View style={styles.dietHeader}>
@@ -24,14 +23,12 @@ const TestApi = () => {
     </View>
   )
 
-  // Componente para renderizar quando a lista estiver vazia
   const ListEmptyComponent = () => (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyText}>Nenhuma dieta encontrada</Text>
     </View>
   )
 
-  // Componente para renderizar o cabeçalho da lista
   const ListHeaderComponent = () => (
     <View style={styles.header}>
       <Text style={styles.title}>Teste de API</Text>

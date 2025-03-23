@@ -6,6 +6,7 @@ import Yorn from '@/components/yorn'
 import createDiet from '../api/diet/createDiet'
 
 const NewDiet = () => {
+  const { userId } = useLocalSearchParams()
   const [formData, setFormData] = useState({
     name: '',
     description: '',

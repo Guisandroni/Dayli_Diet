@@ -1,11 +1,7 @@
 import axios from 'axios'
 
-// Criando uma instância do axios com configurações base
 const api = axios.create({
-    // IMPORTANTE: Escolha o endereço correto baseado no seu ambiente
-    // Para Android Emulator: use 'http://10.0.2.2:3333'
-    // Para iOS Simulator: use 'http://localhost:3333'
-    // Para dispositivo físico: use o IP da sua máquina na rede local (exemplo: 'http://192.168.1.10:3333')
+   
     baseURL: 'http://192.168.1.67:3333',
     timeout: 10000,
     headers: {
@@ -13,13 +9,11 @@ const api = axios.create({
         'Accept': 'application/json',
         'Connection': 'keep-alive'
     },
-    // Adicionando configurações extras para debug
     validateStatus: function (status) {
-        return status >= 200 && status < 500; // Aceita qualquer status entre 200 e 499
+        return status >= 200 && status < 500; 
     }
 })
 
-// Interceptor para log de requisições
 api.interceptors.request.use(
     config => {
         console.log('Enviando requisição para:', config.url)
@@ -32,7 +26,6 @@ api.interceptors.request.use(
     }
 )
 
-// Interceptor para log de respostas
 api.interceptors.response.use(
     response => {
         console.log('Resposta recebida:', response.status)
@@ -57,5 +50,4 @@ api.interceptors.response.use(
     }
 )
 
-// Exportando a instância do axios para uso em outros lugares
 export default api
