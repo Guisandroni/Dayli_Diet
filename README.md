@@ -6,20 +6,28 @@ DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e
 
 <div align="center">
   <div style="display: flex; gap: 0.5rem;">
-    <img alt="Home screen" src="./docs/Screenshot_2025-03-19-16-48-55-430_host.exp.exponent.jpg" width="200px" />
-    <img alt="Statistics screen" src="./docs/Screenshot_2025-03-19-16-49-02-418_host.exp.exponent.jpg" width="200px" />
-    <img alt="New meal screen" src="./docs/Screenshot_2025-03-19-16-49-09-057_host.exp.exponent.jpg" width="200px" />
+    <img alt="Login screen" src="./assets/images/login.png" width="200px" />
+    <img alt="Register screen" src="./assets/images/register.png" width="200px" />
+    <img alt="Home screen" src="./assets/images/home.png" width="200px" />
   </div>
   
   <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-    <img alt="Meal details" src="./docs/Screenshot_2025-03-19-16-49-14-996_host.exp.exponent.jpg" width="200px" />
-    <img alt="Edit meal" src="./docs/Screenshot_2025-03-19-16-49-19-162_host.exp.exponent.jpg" width="200px" />
-    <img alt="Delete meal" src="./docs/Screenshot_2025-03-19-16-49-23-225_host.exp.exponent.jpg" width="200px" />
+    <img alt="New diet screen" src="./assets/images/newdiet.png" width="200px" />
+    <img alt="Success feedback" src="./assets/images/yepDietSequence.png" width="200px" />
+    <img alt="Failure feedback" src="./assets/images/notDietSequence.png" width="200px" />
+  </div>
+
+  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+    <img alt="Statistics screen" src="./assets/images/sequence.png" width="200px" />
   </div>
 </div>
 
 ## ✨ Funcionalidades
 
+- 👤 Autenticação:
+  - Login de usuário
+  - Registro de novo usuário
+  - Persistência de login
 - 📝 Registro de refeições com:
   - Nome
   - Descrição
@@ -34,6 +42,7 @@ DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e
   - Agrupamento de refeições por data
   - Indicadores visuais de status (verde/vermelho)
   - Navegação simplificada
+  - Feedback visual após ações
 
 ## 🚀 Tecnologias
 
@@ -43,6 +52,7 @@ DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e
 - [TypeScript](https://www.typescriptlang.org) - Superset JavaScript tipado
 - [TailwindCSS](https://tailwindcss.com) - Framework CSS utilitário
 - [Expo Router](https://docs.expo.dev/router/introduction) - Sistema de rotas
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) - Persistência de dados local
 
 ### Backend
 - [Fastify](https://www.fastify.io/) - Framework web rápido e eficiente
@@ -103,6 +113,8 @@ Você pode executar o app de várias formas:
 - **API**: Integração com backend para persistência de dados
 - **UI/UX**: Interface moderna e responsiva com feedback visual
 - **Tipagem**: TypeScript para maior segurança e manutenibilidade
+- **Autenticação**: Sistema completo de login e registro
+- **Persistência**: Dados do usuário mantidos entre sessões
 
 
 
