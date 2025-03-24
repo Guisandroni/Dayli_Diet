@@ -5,7 +5,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3333/diets/123b8595-1e1d-4d01-84dc-89a290df8671
+POST http://localhost:3333/diets/67db2e38-6667-41a3-b6d0-0e9ccce292aa
 Content-Type: application/json
 
 
@@ -16,7 +16,7 @@ Content-Type: application/json
     "dateCreated": "12/02/2015",
     "inDiet":       "NAO",
     "id": "006b6d1c-e895-4f2b-823e-0637e833eb67",
-    "userId": "f2146f0-004c-4e68-8e43-22f24212a7c5"
+    "userId": "67db2e38-6667-41a3-b6d0-0e9ccce292aa"
 }   
 
 ###
@@ -102,16 +102,16 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3333/users/diets/123b8595-1e1d-4d01-84dc-89a290df8671
+POST http://localhost:3333/users/diets/67db2e38-6667-41a3-b6d0-0e9ccce292aa
 Content-Type: application/json
 
 {
-  "name": "Pão com ovo",
+  "name": "teste",
   "description": "Refeição da manhã",
   "hourCreated": "08:00",
   "dateCreated": "2023/12/10",
   "inDiet": "NAO",
-  "id": "123b8595-1e1d-4d01-84dc-89a290df8671"
+  "id": "67db2e38-6667-41a3-b6d0-0e9ccce292aa"
 }
 
 

@@ -18,24 +18,21 @@ import { userDiet } from "./services/user-diet/user-diet";
 import { dietsUser } from "./services/user-diet/diets-user";
 
 export const appRoutes = (app: FastifyInstance) => {
-  // Rotas principais de CRUD
   app.get("/diets", listDiet); // Lista todas as refeições
   app.post("/diets", registerDiet); // Cria nova refeição
   app.get("/diets/:userId/:id", onlyDiet); // Busca refeição por ID
   app.put("/diets/:userId/:id", updateDiet); // Atualiza refeição
   app.delete("/diets/:userId/:id", deleteDiet); // Remove refeição
 
-  // Rotas de análise e estatísticas
   app.get("/diets/stats/in-diet/:userId", SimDiet); // Refeições dentro da dieta
   app.get("/diets/stats/out-diet/:userId", NaoDiet); // Refeições fora da dieta
   app.get("/diets/stats/total/:userId", AllDiet); // Total de refeições
 
-  // Rotas de sequência e ordenação
+ 
   app.get("/diets/sequence/in-diet/:userId", getInDietSequence); // Sequência na dieta
   app.get("/diets/sequence/out-diet/:userId", getNotInDietSequence); // Sequência fora da dieta
   app.get("/diets/ordered/:userId", OrderByDate); // Ordenação por data
 
-  // Rotas de usuário
   app.post("/users", registerUser); //registro usuario
   app.get("/users/:id", userId); //busca usuario por id
   app.get("/users", users); //lista todos os usuarios

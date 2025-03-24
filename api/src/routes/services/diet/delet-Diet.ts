@@ -11,7 +11,6 @@ export const deleteDiet = async (request: FastifyRequest, reply: FastifyReply) =
 
         const { id, userId } = validateDietParams.parse(request.params);
 
-        // Verifica se a refeição existe antes de tentar deletar
         const existingDiet = await prisma.diet.findUnique({
             where: { id, userId }
         });

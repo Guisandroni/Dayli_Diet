@@ -3,22 +3,27 @@ import React, { useEffect } from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import DietStatus from '@/components/diet'
-import { useDiets } from '../hooks/useDiets'
 import { useLocalSearchParams } from 'expo-router'
-import { useDiet } from '../hooks/useDiet'
-import { ActivityIndicator } from 'react-native'
-import { useIsFocused } from '@react-navigation/native'
 
 const Diet = () => {
-    const { diets, loading, error, fetchDiets } = useDiets()
-    const { id } = useLocalSearchParams()
-    const isFocused = useIsFocused()
+    const params = useLocalSearchParams()
+    const id = params.id as string
+    const userId = params.userId as string
 
     useEffect(() => {
-      if (isFocused) {
-        fetchDiets()
-      }
-    }, [isFocused])
+        console.log('Diet page params:', { id, userId })
+    }, [id, userId])
+
+    if (!id || !userId) {
+        return (
+            <View className='flex items-center justify-center h-full'>
+                <Text>Parâmetros inválidos</Text>
+            </View>
+        )
+    }
+
+    const formattedId = id.trim()
+    const formattedUserId = userId.trim()
 
     return (
         <View className='h-full bg-green-mid '>
@@ -28,7 +33,7 @@ const Diet = () => {
             </View>
             <StatusBar className=' bg-green-mid' />
             <View className='px-10 bg-white'>
-                <DietStatus item={diets} />
+                <DietStatus id={formattedId} userId={formattedUserId} />
             </View>
         </View>
     )

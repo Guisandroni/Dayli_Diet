@@ -6,15 +6,13 @@ import swaggerUi from '@fastify/swagger-ui'
 
 const app = fastify()
 
-// Register CORS
 app.register(cors, {
-  origin: '*', // Permite todas as origens em desenvolvimento
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
   credentials: true
 })
 
-// Register Swagger
 app.register(swagger, {
   swagger: {
     info: {
@@ -35,10 +33,9 @@ app.register(swaggerUi, {
 
 app.register(appRoutes)
 
-// Configurando o servidor para escutar em todas as interfaces
 app.listen({
     port: process.env.PORT ? parseInt(process.env.PORT) : 3333,
-    host: '0.0.0.0' // Importante: escuta em todas as interfaces
+    host: '0.0.0.0' 
 }).then(() => {
     console.log('Server online')
 })

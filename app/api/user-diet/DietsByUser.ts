@@ -11,7 +11,6 @@ export const getDietsByUser = async (id: string) => {
         const response = await api.get(`/users/diets/user/${id}`);
         console.log('Resposta da API:', response.data);
         
-        // Garante que retornamos um array
         const diets = Array.isArray(response.data) ? response.data : response.data.diets || [];
         return diets;
     } catch (error) {

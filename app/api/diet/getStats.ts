@@ -1,8 +1,15 @@
 import api from "../axios"
 
 interface DietStats {
-  count: number
-  percentage?: number
+  inDiet: {
+    count: number;
+    percentage: number;
+  };
+  outDiet: {
+    count: number;
+    percentage: number;
+  };
+  total: number;
 }
 
 interface SequenceStats {
@@ -12,41 +19,29 @@ interface SequenceStats {
   endDate?: string
 }
 
-export const getDietStats = async () => {
+export const getDietStats = async (userId: string) => {
+  if (!userId) {
+    throw new Error('UserId is required');
+  }
   try {
-    const [inDiet, outDiet] = await Promise.all([
-      api.get('/diets/stats/in-diet'),
-      api.get('/diets/stats/out-diet')
-    ])
-
-    const inDietData = inDiet.data.data as DietStats
-    const outDietData = outDiet.data.data as DietStats
-    const totalCount = inDietData.count + outDietData.count
-
-    return {
-      inDiet: inDietData,
-      outDiet: outDietData,
-      total: { count: totalCount }
-    }
+    // Busca todas as estatísticas de uma vez
+    const response = await api.get(`/diets/stats/total/${userId}`);
+    return response.data.data;
   } catch (error) {
-    console.error('Erro ao buscar estatísticas:', error)
-    throw error
+    console.error('Erro ao buscar estatísticas:', error);
+    throw error;
   }
 }
 
-export const getDietSequences = async () => {
+export const getDietSequences = async (userId: string) => {
+  if (!userId) {
+    throw new Error('UserId is required');
+  }
   try {
-    const [inDietSeq, outDietSeq] = await Promise.all([
-      api.get('/diets/sequence/in-diet'),
-      api.get('/diets/sequence/out-diet')
-    ])
-
-    return {
-      inDietSequence: (inDietSeq.data.data as SequenceStats).maxSequence,
-      outDietSequence: (outDietSeq.data.data as SequenceStats).maxSequence
-    }
+    const response = await api.get(`/diets/ordered/${userId}`);
+    return response.data.data;
   } catch (error) {
-    console.error('Erro ao buscar sequências:', error)
-    throw error
+    console.error('Erro ao buscar sequências:', error);
+    throw error;
   }
 } 

@@ -3,26 +3,33 @@ import getDiets, { Diet } from '../api/diet/getDiets'
 import deleteDiet from '../api/diet/deleteDiet'
 import { useIsFocused } from '@react-navigation/native'
 
-export const useDiets = (userId:string) => {
+export const useDiets = (userId: string) => {
   const [diets, setDiets] = useState<Diet[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const isFocused = useIsFocused()
 
   const fetchDiets = async () => {
+    if (!userId) {
+      console.error('UserId não fornecido')
+      setError('UserId é obrigatório')
+      return
+    }
+
     try {
       setLoading(true)
       setError(null)
-      const data = await getDiets()
+      const data = await getDiets(userId)
       
       // Mantém os dados originais, apenas garantindo que os campos obrigatórios existam
       const formattedDiets = data.map((diet: Diet) => ({
         id: diet.id || String(Math.random()),
         name: diet.name || 'Dieta sem nome',
-        hourCreated: diet.hourCreated, // Mantém a hora original do banco de dados
+        hourCreated: diet.hourCreated,
         dateCreated: diet.dateCreated,
         description: diet.description,
-        inDiet: diet.inDiet
+        inDiet: diet.inDiet,
+        userId: diet.userId || userId
       }))
       
       console.log('Dietas formatadas:', JSON.stringify(formattedDiets, null, 2))
@@ -36,11 +43,17 @@ export const useDiets = (userId:string) => {
   }
 
   const removeDiet = async (id: string) => {
+    if (!userId) {
+      console.error('UserId não fornecido')
+      setError('UserId é obrigatório')
+      return
+    }
+
     try {
       setLoading(true)
       setError(null)  
-      await deleteDiet(userId,id)
-      await fetchDiets() // Recarrega a lista após deletar
+      await deleteDiet(userId, id)
+      await fetchDiets()
     } catch (err: any) {
       console.error('Erro ao deletar dieta:', err)
       setError(err.message || 'Erro ao deletar dieta. Verifique sua conexão.')
@@ -51,10 +64,10 @@ export const useDiets = (userId:string) => {
   }
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && userId) {
       fetchDiets()
     }
-  }, [isFocused])
+  }, [isFocused, userId])
 
   return {
     diets,

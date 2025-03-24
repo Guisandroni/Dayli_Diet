@@ -51,7 +51,6 @@ export function useUser() {
 
     const logout = () => {
         setUser(null)
-        // Aqui você pode adicionar lógica adicional como limpar o token do storage
     }
 
     return { 

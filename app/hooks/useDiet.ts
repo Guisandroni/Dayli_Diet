@@ -21,17 +21,29 @@ interface UpdateDietData {
   dateCreated?: string
 }
 
-export const useDiet = (id: string,userId:string) => {
+export const useDiet = (id: string, userId: string) => {
   const [diet, setDiet] = useState<Diet | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const isFocused = useIsFocused()
 
   const fetchDiet = async () => {
+    if (!id || !userId) {
+      console.error('ID ou userId não fornecidos')
+      setError('ID ou userId não fornecidos')
+      return
+    }
+
     try {
       setLoading(true)
       setError(null)
-      const data = await getDietID(id,userId)
+      
+      const formattedId = id.trim()
+      const formattedUserId = userId.trim()
+      
+      console.log('Buscando dieta com IDs:', { formattedId, formattedUserId })
+      
+      const data = await getDietID(formattedUserId, formattedId)
       setDiet(data)
     } catch (err: any) {
       console.error('Erro ao buscar dieta:', err)
@@ -42,10 +54,21 @@ export const useDiet = (id: string,userId:string) => {
   }
 
   const updateDietData = async (data: UpdateDietData) => {
+    if (!id || !userId) {
+      console.error('ID ou userId não fornecidos')
+      setError('ID ou userId não fornecidos')
+      return
+    }
+
     try {
       setLoading(true)
       setError(null)
-      const updatedDiet = await updateDiet(userId,id, data)
+      
+      // Garante que os IDs estão no formato correto
+      const formattedId = id.trim()
+      const formattedUserId = userId.trim()
+      
+      const updatedDiet = await updateDiet(formattedUserId, formattedId, data)
       setDiet(updatedDiet)
       return updatedDiet
     } catch (err: any) {

@@ -13,7 +13,6 @@ export default function Register() {
     const handleRegister = async () => {
         const response = await createUser(name, email, password)
         if (response) {
-            // Registro bem sucedido, redireciona para home
             router.replace('/pages/home')
         }
     }

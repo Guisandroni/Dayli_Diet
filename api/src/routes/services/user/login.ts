@@ -25,7 +25,6 @@ const paramsLogin = z.object({
         return reply.status(401).send({ message: 'Senha inválida' })
     }   
 
-    // Retorna os dados do usuário (exceto a senha)
     const { password: _, ...userWithoutPassword } = user
     return reply.status(200).send(userWithoutPassword)
 }

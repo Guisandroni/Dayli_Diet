@@ -1,28 +1,29 @@
 import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { dietDatasecond } from '@/seed/constraints'
-import { router, useLocalSearchParams } from 'expo-router'
+import { router } from 'expo-router'
 import { DeleteDiet } from './deleteDiet'
 import { useDiet } from '@/app/hooks/useDiet'
 import { Diet } from '@/app/api/diet/getDiets'
-import { useDiets } from '@/app/hooks/useDiets'
 
-const DietStatus = ({ item }: { item: any }) => {
+interface DietStatusProps {
+    id: string;
+    userId: string;
+}
+
+const DietStatus = ({ id, userId }: DietStatusProps) => {
     const [modal, setModal] = useState(false)
-    const { id, userId } = useLocalSearchParams()
-    const { diet } = useDiet(id as string, userId as string)
-    console.log(diet)
-   
+    const { diet } = useDiet(id, userId)
+    
+    console.log('DietStatus props:', { id, userId })
+    console.log('DietStatus diet:', diet)
 
-
-  
     return (
         <View className='flex flex-col justify-between h-full pb-40 bg-white '>
             <View>
                 <View className='gap-2 mt-10 '>
                     <Text className='text-xl font-nunito-bold'>{diet?.name}</Text>
                     <Text className='text-lg font-nunito-regular'>{diet?.description}</Text>
-
                 </View>
                 <View className='gap-2 mt-10'>
                     <Text className='text-xl font-nunito-bold'>Data e hora</Text>

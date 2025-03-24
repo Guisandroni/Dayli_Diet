@@ -5,10 +5,12 @@ import { router, useLocalSearchParams } from 'expo-router'
 import Yorn from '@/components/yorn'
 import { useIsFocused } from '@react-navigation/native'
 import { useDiet } from '../hooks/useDiet'
+import { useDietbyuser } from '../hooks/useDietbyuser'
 
 const EditDiet = () => {
   const { id, userId } = useLocalSearchParams()
-  const { diet, loading, error, updateDiet } = useDiet(id as string,userId as string)
+  const { diet, loading, error, updateDiet } = useDiet(id as string, userId as string)
+  const { fetchDiets } = useDietbyuser(userId as string)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -17,7 +19,6 @@ const EditDiet = () => {
     inDiet: '' as 'SIM' | 'NAO'
   })
 
-  // Carrega os dados da dieta quando componente montar
   useEffect(() => {
     if (diet) {
       setFormData({
@@ -39,6 +40,9 @@ const EditDiet = () => {
         dateCreated: formData.dateCreated,
         inDiet: formData.inDiet
       })
+      
+      await fetchDiets()
+      
       router.back()
     } catch (error) {
       console.error('Erro ao salvar:', error)

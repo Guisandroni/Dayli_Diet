@@ -14,15 +14,43 @@ interface GroupedDiets {
   diets: any[];
 }
 
+interface DietStats {
+  inDiet: {
+    percentage: number;
+    count: number;
+  };
+  outDiet: {
+    count: number;
+  };
+  total: number;
+}
+
+interface DietSequence {
+  maxSequence: number;
+  currentSequence: number;
+  startDate?: string;
+  endDate?: string;
+}
+
 export default function Home() {
   const [userId, setUserId] = useState<string | null>(null);
-  const { diets, loading, fetchDiets } = useDietbyuser(userId || '');
+  const { diets, loading: dietsLoading, error: dietsError, fetchDiets } = useDietbyuser(userId || '');
   const isFocused = useIsFocused();
-  const [stats, setStats] = useState<any>(null);
-  const [sequences, setSequences] = useState<any>(null);
-  const [inLoading, setLoading] = useState(true);
+  const [stats, setStats] = useState<DietStats | null>(null);
+  const [sequences, setSequences] = useState<DietSequence | null>(null);
+  const [loading, setLoading] = useState(true);
   const [groupedDiets, setGroupedDiets] = useState<GroupedDiets[]>([]);
-  const porcentagem = stats?.inDiet?.percentage?.toFixed(2);
+  const porcentagem = stats?.inDiet?.percentage?.toFixed(2) || '0';
+  const isGoodDiet = Number(porcentagem) >= 50;
+
+  const handleNewdiet = () => {
+    if (!userId) {
+      console.error('Usuário não autenticado');
+      router.replace('/pages/login');
+      return;
+    }
+    router.push('/pages/newdiet');
+  }
 
   useEffect(() => {
     const getUserId = async () => {
@@ -45,11 +73,13 @@ export default function Home() {
   }, []);
   
   const loadData = async () => {
+    if (!userId) return;
+
     try {
       setLoading(true);
       const [statsData, sequencesData] = await Promise.all([
-        getDietStats(),
-        getDietSequences()
+        getDietStats(userId),
+        getDietSequences(userId)
       ]);
       setStats(statsData);
       setSequences(sequencesData);
@@ -80,7 +110,6 @@ export default function Home() {
         return acc;
       }, {});
 
-      // Converte o objeto agrupado em array e ordena por data (mais recente primeiro)
       const groupedArray = Object.entries(grouped).map(([date, diets]) => ({
         date,
         diets
@@ -93,6 +122,15 @@ export default function Home() {
     }
   }, [diets]);
 
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('userId');
+      router.replace('/pages/login');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
+  };
+
   const renderDietGroup = ({ item }: { item: GroupedDiets }) => (
     <View className="gap-4 mt-10">
       <Text className="text-2xl font-bold">{item.date}</Text>
@@ -103,6 +141,20 @@ export default function Home() {
       </View>
     </View>
   );
+
+  if (dietsError) {
+    return (
+      <SafeAreaView className="items-center justify-center flex-1 bg-gray-100">
+        <Text className="text-xl text-red-500">Erro ao carregar dietas</Text>
+        <TouchableOpacity 
+          onPress={fetchDiets}
+          className="px-6 py-3 mt-4 bg-gray-1 rounded-xl"
+        >
+          <Text className="text-white">Tentar novamente</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView className="h-full px-6 py-8 bg-gray-100">
@@ -116,12 +168,14 @@ export default function Home() {
             <Text className="text-3xl font-nunito-bold">Daily Diet</Text>
           </View>
           <TouchableOpacity  
-            className="w-12 h-12 bg-black rounded-full"
-            onPress={() => router.push('/testapi')}
-          />
+            onPress={handleLogout}
+            className="items-center justify-center w-12 h-12 bg-black rounded-full"
+          >
+            <MaterialCommunityIcons name="logout" size={24} color="white" />
+          </TouchableOpacity>
         </View>
-
-        <View className="relative flex items-center justify-center py-6 mt-10 bg-green-mid rounded-xl">
+      
+        <View className={`relative flex items-center justify-center py-6 mt-10 ${isGoodDiet ? 'bg-green-mid' : 'bg-red-mid'} rounded-xl`}>
           <Text className="text-4xl font-bold text-center">
            {porcentagem}% {'\n'}
             <Text className="text-xl font-light">das refeições dentro da dieta</Text>
@@ -138,7 +192,7 @@ export default function Home() {
         <View className="flex flex-col items-start gap-4 mt-10">
           <Text className="text-xl">Refeições</Text>
           <TouchableOpacity 
-            onPress={() => router.push('/pages/newdiet')}
+            onPress={handleNewdiet}
             className="flex flex-row items-center justify-center w-full h-16 gap-6 bg-gray-1 rounded-xl"
           >
             <AntDesign name="plus" size={22} color="white" className="font-bold" />
@@ -146,7 +200,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        {loading ? (
+        {(dietsLoading || loading) ? (
           <View className="flex items-center justify-center mt-10">
             <Text>Carregando dietas...</Text>
           </View>
