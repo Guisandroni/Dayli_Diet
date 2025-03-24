@@ -6,19 +6,21 @@ DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e
 
 <div align="center">
   <div style="display: flex; gap: 0.5rem;">
-    <img alt="Login screen" src="./assets/images/login.png" width="200px" />
-    <img alt="Register screen" src="./assets/images/register.png" width="200px" />
-    <img alt="Home screen" src="./assets/images/home.png" width="200px" />
+    <img alt="Login screen" src="./docs/Screenshot_2025-03-24-14-39-14-847_host.exp.exponent.jpg" width="200px" />
+    <img alt="Register screen" src="./docs/Screenshot_2025-03-24-14-39-22-079_host.exp.exponent.jpg" width="200px" />
+    <img alt="Home screen" src="./docs/Screenshot_2025-03-24-14-39-33-850_host.exp.exponent.jpg" width="200px" />
   </div>
   
   <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-    <img alt="New diet screen" src="./assets/images/newdiet.png" width="200px" />
-    <img alt="Success feedback" src="./assets/images/yepDietSequence.png" width="200px" />
-    <img alt="Failure feedback" src="./assets/images/notDietSequence.png" width="200px" />
+    <img alt="New diet screen" src="./docs/Screenshot_2025-03-24-14-40-16-973_host.exp.exponent.jpg" width="200px" />
+    <img alt="Edit diet screen" src="./docs/Screenshot_2025-03-24-14-40-20-426_host.exp.exponent.jpg" width="200px" />
+    <img alt="Diet details" src="./docs/Screenshot_2025-03-24-14-40-25-524_host.exp.exponent.jpg" width="200px" />
   </div>
 
   <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-    <img alt="Statistics screen" src="./assets/images/sequence.png" width="200px" />
+    <img alt="Statistics screen" src="./docs/Screenshot_2025-03-24-14-50-03-165_host.exp.exponent.jpg" width="200px" />
+    <img alt="Success feedback" src="./docs/Screenshot_2025-03-24-14-27-42-163_host.exp.exponent.jpg" width="200px" />
+    <img alt="Failure feedback" src="./docs/Screenshot_2025-03-24-14-27-56-466_host.exp.exponent.jpg" width="200px" />
   </div>
 </div>
 
