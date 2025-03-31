@@ -2,6 +2,15 @@
 
 DailyDiet é um aplicativo mobile para controle de dieta, permitindo registrar e acompanhar suas refeições diárias, mantendo um histórico do que está dentro ou fora da sua dieta.
 
+## 📥 Instalação via APK
+
+Para instalar o aplicativo diretamente no seu dispositivo Android:
+
+1. [Clique aqui para baixar o APK](Downloads/application-b4df21ba-c117-4a8a-85db-d039a470aa72.apk)
+2. No seu dispositivo Android, habilite a instalação de apps de fontes desconhecidas
+3. Abra o arquivo APK baixado
+4. Siga as instruções de instalação na tela
+
 ## 📱 Screenshots
 
 <div align="center">
@@ -107,6 +116,8 @@ Você pode executar o app de várias formas:
 - **Expo Go**: Escaneie o QR code com o app Expo Go ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779))
 - **Emulador**: Use um [emulador Android](https://docs.expo.dev/workflow/android-studio-emulator) ou [simulador iOS](https://docs.expo.dev/workflow/ios-simulator)
 - **Dispositivo físico**: Conecte seu dispositivo via USB
+
+
 
 ## 🎯 Recursos Principais
 
