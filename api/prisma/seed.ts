@@ -3,6 +3,15 @@ import { PrismaClient, DietStatus } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  // Create a user first
+  const user = await prisma.user.create({
+    data: {
+      name: "Test User",
+      email: "test@example.com",
+      password: "hashed_password_here", // In a real app, this should be properly hashed
+    },
+  });
+
   const db = [
     // 15/03/2025
     {
@@ -11,7 +20,7 @@ async function main() {
       hourCreated: "06:30",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Pão integral com ovos mexidos",
@@ -19,7 +28,7 @@ async function main() {
       hourCreated: "08:00",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Arroz, feijão e filé de frango",
@@ -27,7 +36,7 @@ async function main() {
       hourCreated: "12:15",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Bolo de cenoura com chocolate",
@@ -35,7 +44,7 @@ async function main() {
       hourCreated: "16:00",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Sopa de legumes",
@@ -43,7 +52,7 @@ async function main() {
       hourCreated: "19:30",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Pipoca com manteiga",
@@ -51,7 +60,7 @@ async function main() {
       hourCreated: "22:00",
       dateCreated: "15/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
 
     // 18/03/2025
@@ -68,7 +77,7 @@ async function main() {
       hourCreated: "08:30",
       dateCreated: "18/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Macarrão integral com frango",
@@ -76,7 +85,7 @@ async function main() {
       hourCreated: "12:45",
       dateCreated: "18/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Chocolate ao leite",
@@ -84,7 +93,7 @@ async function main() {
       hourCreated: "16:15",
       dateCreated: "18/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Peixe assado com arroz integral",
@@ -92,7 +101,7 @@ async function main() {
       hourCreated: "19:30",
       dateCreated: "18/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Sorvete de creme",
@@ -100,7 +109,7 @@ async function main() {
       hourCreated: "21:30",
       dateCreated: "18/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
 
     // 21/03/2025
@@ -110,7 +119,7 @@ async function main() {
       hourCreated: "06:00",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Omelete com queijo cottage",
@@ -118,7 +127,7 @@ async function main() {
       hourCreated: "08:00",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Arroz, feijão e carne moída",
@@ -126,7 +135,7 @@ async function main() {
       hourCreated: "12:00",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Batata frita",
@@ -134,7 +143,7 @@ async function main() {
       hourCreated: "16:00",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Caldo de feijão",
@@ -142,7 +151,7 @@ async function main() {
       hourCreated: "19:45",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Chá de camomila",
@@ -150,7 +159,7 @@ async function main() {
       hourCreated: "22:15",
       dateCreated: "21/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
 
     // 24/03/2025
@@ -160,7 +169,7 @@ async function main() {
       hourCreated: "06:30",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Tapioca com queijo e presunto",
@@ -168,7 +177,7 @@ async function main() {
       hourCreated: "08:30",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Frango grelhado com batata doce",
@@ -176,7 +185,7 @@ async function main() {
       hourCreated: "12:45",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Pão de queijo",
@@ -184,7 +193,7 @@ async function main() {
       hourCreated: "16:30",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Salada de quinoa com frango",
@@ -192,7 +201,7 @@ async function main() {
       hourCreated: "19:00",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Barrinha de cereal",
@@ -200,7 +209,7 @@ async function main() {
       hourCreated: "22:00",
       dateCreated: "24/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
 
     // 27/03/2025
@@ -210,7 +219,7 @@ async function main() {
       hourCreated: "06:30",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Panqueca de banana",
@@ -218,7 +227,7 @@ async function main() {
       hourCreated: "08:30",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Arroz integral, feijão e filé de peixe",
@@ -226,7 +235,7 @@ async function main() {
       hourCreated: "12:30",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Biscoito recheado",
@@ -234,7 +243,7 @@ async function main() {
       hourCreated: "16:30",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.NAO,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Sopa de ervilha",
@@ -242,7 +251,7 @@ async function main() {
       hourCreated: "19:30",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
     {
       name: "Torrada com geleia",
@@ -250,7 +259,7 @@ async function main() {
       hourCreated: "22:15",
       dateCreated: "27/03/2025",
       inDiet: DietStatus.SIM,
-      userId: "4fb10431-9a07-446b-87bf-3f3a0e6d1e2e",
+      userId: user.id,
     },
   ];
 

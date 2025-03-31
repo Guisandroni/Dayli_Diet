@@ -1,6 +1,6 @@
 
 
-GET http://localhost:3333/diets
+GET https://apidailydiet.onrender.com/diets
 Content-Type: application/json
 
 ###
@@ -75,12 +75,12 @@ app.get("/diets/stats/in-diet", SimDiet);      // Refeições dentro da dieta
 
 ###
 
-POST http://localhost:3333/users
+POST https://apidailydiet.onrender.com/users
 Content-Type: application/json
 
 {
-  "name": "Guilherme",
-  "email": "guilherme@gmail.com",
+  "name": "teste",
+  "email": "test@gmail.com",
   "password": "123456"
 }
 
@@ -90,7 +90,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/users
+GET https://apidailydiet.onrender.com/users
 Content-Type: application/json
 
 
